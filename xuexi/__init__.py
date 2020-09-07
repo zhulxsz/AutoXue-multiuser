@@ -766,7 +766,7 @@ class App(Automation):
             self.read_count = 0
             self.read_delay = random.randint(45, 60)
         else:
-            self.read_count = round((t-g)/2)
+            self.read_count = t-g
             # self.read_count = random.randint(
             #     cfg.getint('prefers', 'article_count_min'),
             #     cfg.getint('prefers', 'article_count_max'))
@@ -945,9 +945,14 @@ class App(Automation):
 
     def read(self):
         if 0 == self.read_count:
-            self.safe_click('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]')
-            logger.info(f'新闻阅读已达成，无需重复阅读,只评论转发')
-            self._comment_only(self.star_share_comments_count)
+            g, t = self.score["发表观点"]
+            if t == g:
+                logger.info(f'新闻阅读订阅均已达成，跳过')
+                return
+            else:
+                self.safe_click('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]')
+                logger.info(f'新闻阅读已达成，无需重复阅读,只评论转发')
+                self._comment_only(self.star_share_comments_count)
             return
         logger.debug(f'正在进行新闻学习...')
         # self.safe_back('mine -> home')
