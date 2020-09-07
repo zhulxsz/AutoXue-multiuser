@@ -844,7 +844,7 @@ class App(Automation):
                 article.click()
                 num -= 1
                 logger.info(f'<{num}> 当前篇目 {title}')
-                article_delay = random.randint(self.read_delay, self.read_delay + min(10, self.read_count))
+                article_delay = random.randint(120, 120 + min(10, self.read_count))
                 logger.info(f'阅读时间估计 {article_delay} 秒...')
                 while article_delay > 0:
                     if article_delay < 20:
