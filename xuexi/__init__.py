@@ -156,7 +156,7 @@ class App(Automation):
 
     def login_or_not(self):
         # com.alibaba.android.user.login.SignUpWithPwdActivity
-        time.sleep(15)  # 首屏等待时间
+        time.sleep(30)  # 首屏等待时间
         try:
             home = self.driver.find_element_by_xpath(rules["mine_entry"])
             # home = self.driver.find_element_by_xpath(rules["mine_entry"])
@@ -945,6 +945,7 @@ class App(Automation):
 
     def read(self):
         if 0 == self.read_count:
+            self.safe_click('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]')
             logger.info(f'新闻阅读已达成，无需重复阅读,只评论转发')
             self._comment_only(self.star_share_comments_count)
             return
