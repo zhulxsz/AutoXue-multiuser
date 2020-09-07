@@ -33,12 +33,6 @@ def shuffle(funcs):
 
 
 def start():
-    # if random.random() > 0.5:
-    #     logger.debug(f'视听学习优先')
-    #     app.watch()
-    #     app.music()
-    #     shuffle([app.read, app.daily, app.challenge, app.weekly])
-    # else:
     logger.debug(f'视听学习置后')
     app.music()
     shuffle([app.daily, app.challenge, app.read, app.weekly])
@@ -53,20 +47,21 @@ def test():
     app.weekly()
     logger.info(f'测试完毕')
 
+
 # 循环刷题
-def recycle_main_do():
-    t = time.time()
-    while True:
-        try:
-            start()
-            break
-        except Exception as ex:
-            print("出现如下异常%s" % ex)
-            app.logout_or_not()
-            app.driver.close_app()
-            if time.time() - t > 3600:
-                print('程序存在错误，试了一个小时都不行，换下个号码刷')
-                break
+# def recycle_main_do():
+#     t = time.time()
+#     while True:
+#         try:
+#             start()
+#             break
+#         except Exception as ex:
+#             print("出现如下异常%s" % ex)
+#             app.logout_or_not()
+#             app.driver.close_app()
+#             if time.time() - t > 3600:
+#                 print('程序存在错误，试了一个小时都不行，换下个号码刷')
+#                 break
 
 
 if __name__ == "__main__":
@@ -84,17 +79,15 @@ if __name__ == "__main__":
                 start()
                 break
             except Exception as ex:
-                logger.info(f'刷分出现如下异常%s' % ex)
+                logger.info(f'刷分出现如下异常    %s' % ex)
                 try:
                     app.logout_or_not()
                     app.driver.close_app()
                 except Exception as ex:
-                    logger.info(f'退出APP出现如下异常%s' % ex)
+                    logger.info(f'退出APP出现如下异常    %s' % ex)
                 continue
                 if time.time() - t > 3600:
                     print('程序存在错误，试了一个小时都不行，换下个号码刷')
                     logger.info(f'程序存在错误，试了一个小时都不行，换下个号码刷')
                     break
-    # start()
     sys.exit(0)
-    # test()

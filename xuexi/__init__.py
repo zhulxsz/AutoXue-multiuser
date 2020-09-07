@@ -227,6 +227,7 @@ class App(Automation):
         # print(self.score)
         for i in self.score:
             logger.debug(f'{i}, {self.score[i]}')
+            logger.info(f'{i}, {self.score[i]}')
         self.safe_back('score -> home')
 
     def back_or_not(self, title):
@@ -945,6 +946,12 @@ class App(Automation):
 
     def read(self):
         if 0 == self.read_count:
+            g, t = self.score["本地频道"]
+            if t == g:
+                logger.info(f'本地频道已达成，跳过')
+            else:
+                self.safe_click('//*[@resource-id="cn.xuexi.android:id/home_bottom_tab_button_work"]')
+                self._kaleidoscope()
             g, t = self.score["发表观点"]
             if t == g:
                 logger.info(f'新闻阅读订阅均已达成，跳过')
