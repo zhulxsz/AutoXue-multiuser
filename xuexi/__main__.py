@@ -84,13 +84,11 @@ if __name__ == "__main__":
                 start()
                 break
             except Exception as ex:
-                # print("刷分出现如下异常%s" % ex)
                 logger.info(f'刷分出现如下异常%s' % ex)
                 try:
                     app.logout_or_not()
                     app.driver.close_app()
                 except Exception as ex:
-                    # print("退出APP出现如下异常%s" % ex)
                     logger.info(f'退出APP出现如下异常%s' % ex)
                 continue
                 if time.time() - t > 3600:
