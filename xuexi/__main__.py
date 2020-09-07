@@ -85,7 +85,6 @@ if __name__ == "__main__":
                     app.driver.close_app()
                 except Exception as ex:
                     logger.info(f'退出APP出现如下异常    %s' % ex)
-                continue
                 if time.time() - t > 3600:
                     print('程序存在错误，试了一个小时都不行，换下个号码刷')
                     logger.info(f'程序存在错误，试了一个小时都不行，换下个号码刷')
